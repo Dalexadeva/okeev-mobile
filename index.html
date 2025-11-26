@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKEEV - Electric Vehicle Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Navbar */
+        .navbar-custom {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .navbar-custom .container {
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            width: 100%;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: auto;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: auto;
+        }
+
+        .search-bar {
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 8px 20px;
+            width: 100%;
+        }
+
+        .icon-btn {
+            background: var(--light-green);
+            border: none;
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            min-height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .navbar-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .navbar-bottom {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Container untuk content */
+        .content-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* Category Buttons */
+        .category-section {
+            padding: 15px 0;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: none;
+            padding: 0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover .category-icon {
+            background: var(--light-green);
+        }
+
+        .category-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary-blue);
+        }
+
+        .category-btn small {
+            font-size: 11px;
+            line-height: 1.3;
+            word-wrap: break-word;
+            color: #333;
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            border-radius: 20px;
+            padding: 0;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .promo-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 150px;
+        }
+
+        /* Main Text Section */
+        .main-text-section {
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .main-text-section h2 {
+            color: var(--primary-blue);
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 24px;
+            line-height: 1.3;
+        }
+
+        .main-text-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Slider */
+        .slider-section {
+            overflow-x: auto;
+            padding: 20px 0;
+            margin: 0 -20px;
+            padding-left: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-blue) #e0e0e0;
+            scroll-padding-left: 20px;
+        }
+
+        .slider-section::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .slider-section::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .slider-section::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        .slider-container {
+            display: flex;
+            gap: 20px;
+            padding: 10px 0;
+            padding-right: 20px;
+        }
+
+        .slider-card {
+            min-width: 300px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            height: 150px;
+        }
+
+        .slider-card-short {
+            min-width: 200px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            height: 150px;
+        }
+
+        .slider-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slider-card-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2;
+        }
+
+        .see-more-btn {
+            background: rgba(0, 0, 0, 0.6) !important;
+            backdrop-filter: blur(10px);
+            color: white !important;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .see-more-btn:hover {
+            background: rgba(0, 0, 0, 0.8) !important;
+            color: white !important;
+        }
+
+        /* Why Choose Us */
+        .why-choose-section {
+            background: var(--dark-bg);
+            color: white;
+            padding: 50px 0;
+            margin: 40px 0 0 0;
+            position: relative;
+        }
+
+        .why-choose-section h3 {
+            color: white;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            margin-bottom: 40px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .features-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            min-width: 60px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            color: var(--light-green);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .feature-item p {
+            color: white;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Counting Section */
+        .counting-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .count-item h3 {
+            color: var(--primary-blue);
+            font-family: 'Oxanium', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .count-item p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .customer-profiles {
+            display: flex;
+            gap: -10px;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            background: #ddd;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin-left: -10px;
+            overflow: hidden;
+            min-width: 60px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-img:first-child {
+            margin-left: 0;
+        }
+
+        .customer-text {
+            margin-left: 20px;
+        }
+
+        .counting-section h4 {
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .counting-section p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Collaboration */
+        .collab-section {
+            padding: 40px 0;
+        }
+
+        .collab-section h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            margin: 20px;
+        }
+
+        .collab-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            margin: 25px;
+        }
+
+        .collab-tab {
+            padding: 10px 30px;
+            border: 2px solid var(--dark-bg);
+            background: white;
+            cursor: pointer;
+            border-radius: 25px;
+        }
+
+        .collab-tab.active {
+            background: var(--dark-bg);
+            color: var(--light-green);
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+        }
+
+        .brand-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+        }
+
+        .brand-logo {
+            width: 80%;
+            max-width: 90px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Most Searched */
+        .most-searched-section {
+            padding: 40px 0;
+        }
+
+        .most-searched-section h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .strip-divider {
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-green));
+            margin: 20px 0;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .search-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .search-tab.active {
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Vehicle Card */
+        .vehicle-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .vehicle-img {
+            display: flex;
+            width: 100%;
+            height: 220px;
+            background: gray;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .car-img {
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+            max-height: 180px;
+        }
+
+        .vehicle-info {
+            padding: 20px;
+        }
+
+        .vehicle-specs {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            margin: 15px 0;
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .vehicle-price {
+            font-family: 'Oxanium', sans-serif;
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .details-btn {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Hotbar */
+        .hotbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        .hotbar-item {
+            text-align: center;
+            color: #666;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .hotbar-item.active {
+            color: var(--primary-blue);
+        }
+
+        .hotbar-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .brand-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-container {
+                flex-direction: column;
+            }
+
+            .feature-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <div class="container">
+            <!-- Top Row: Logo dan Notifikasi -->
+            <div class="navbar-top">
+                <div class="logo-icon">
+                    <img src="assets/Okeev.png" alt="OKEEV Logo">
+                </div>
+                <button class="icon-btn">
+                    <i class="bi bi-bell"></i>
+                </button>
+            </div>
+
+            <!-- Bottom Row: Search Bar dan Cart -->
+            <div class="navbar-bottom">
+                <input type="text" class="search-bar" placeholder="Search Vehicle/electronic">
+                <button class="icon-btn">
+                    <i class="bi bi-cart"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Category Section -->
+    <div class="container content-container category-section">
+        <div class="row g-2 mx-0">
+            <div class="col-3">
+                <div class="category-btn">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+                            <path fill="#30445C" fill-rule="evenodd" d="M128 298.666c23.564 0 42.667 19.103 42.667 42.667S151.564 384 128 384s-42.666-19.103-42.666-42.667s19.102-42.667 42.666-42.667m245.334 0c23.564 0 42.666 19.103 42.666 42.667S396.898 384 373.334 384s-42.667-19.103-42.667-42.667s19.103-42.667 42.667-42.667m-88.89-149.333l5.69 4.267l81.856 61.397l65.025 16.266c17.877 4.47 30.731 19.85 32.182 37.966l.137 3.427v74.667l-16.16 4.04l-17.466 4.367a64.2 64.2 0 0 0 1.626-14.397c0-35.346-28.654-64-64-64s-64 28.654-64 64c0 7.48 1.283 14.661 3.642 21.334H188.358A63.9 63.9 0 0 0 192 341.333c0-35.346-28.653-64-64-64c-35.346 0-64 28.654-64 64c0 3.244.242 6.431.707 9.545l-22.04-22.042V226.943l4.945-5.934l53.333-64l6.397-7.676zM270.23 192H127.318l-35.55 42.666h206.899l12.192-12.192z"/>
+                        </svg>
+                    </div>
+                    <small>Electric<br>Car</small>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="category-btn">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+                            <path fill="#30445C" d="M216 120a41 41 0 0 0-6.6.55l-5.82-15.14A55.6 55.6 0 0 1 216 104a8 8 0 0 0 0-16h-19.12l-13.41-34.87A8 8 0 0 0 176 48h-32a8 8 0 0 0 0 16h26.51l9.23 24H152c-18.5 0-33.5 4.31-43.37 12.46a16 16 0 0 1-16.76 2.07c-10.58-4.81-73.29-30.12-73.8-30.26a8 8 0 0 0-5 15.19s55.5 21.94 66.53 32.94A55.67 55.67 0 0 1 95.43 152H79.2a40 40 0 1 0 0 16h52.12a31.91 31.91 0 0 0 30.74-23.1a56 56 0 0 1 26.59-33.72l5.82 15.13A40 40 0 1 0 216 120M40 168h22.62a24 24 0 1 1 0-16H40a8 8 0 0 0 0 16m176 16a24 24 0 0 1-15.58-42.23l8.11 21.1a8 8 0 1 0 14.94-5.74L215.35 136h.65a24 24 0 0 1 0 48"/>
+                        </svg>
+                    </div>
+                    <small>Electric<br>Motor</small>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="category-btn">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
+                            <path fill="#30445C" d="M7.616 22q-.667 0-1.141-.475T6 20.386V3.615q0-.69.463-1.152T7.616 2h8.846q.666 0 1.14.475t.475 1.14v3.216q.373.04.648.31q.275.269.275.648v1.769q0 .379-.275.648t-.648.31v9.869q0 .666-.475 1.14t-1.14.475zm2.269-2.77h4.307q.213 0 .357-.143q.143-.144.143-.357t-.143-.356t-.357-.143H9.885q-.213 0-.357.144t-.143.356t.143.356t.357.144"/>
+                        </svg>
+                    </div>
+                    <small>Handphone</small>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="category-btn">
+                    <div class="category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 32 32">
+                            <path fill="#30445C" d="M4 9.25A3.25 3.25 0 0 1 7.25 6h17.5A3.25 3.25 0 0 1 28 9.25v9.5A3.25 3.25 0 0 1 24.75 22H7.25A3.25 3.25 0 0 1 4 18.75zM3 24a1 1 0 1 0 0 2h26a1 1 0 1 0 0-2z"/>
+                        </svg>
+                    </div>
+                    <small>Laptop</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Banner -->
+    <div class="container content-container">
+        <div class="promo-banner">
+            <img src="assets/banner/promo-car.png" alt="Electric Vehicle Promo">
+        </div>
+    </div>
+
+    <!-- Main Text -->
+    <div class="container content-container main-text-section">
+        <h2>The Future of Driving Starts Here</h2>
+        <p>Find your dream electric vehicle from a variety of leading brands. Energy-efficient, environmentally friendly, and ready to transform the way you travel.</p>
+    </div>
+
+    <!-- Slider Section -->
+    <div class="container content-container">
+        <div class="slider-wrapper">
+            <div class="slider-section">
+                <div class="slider-container">
+                    <div class="slider-card">
+                        <img src="assets/slider/slider1.jpg" alt="Electric Vehicle 1" class="slider-card-img">
+                        <div class="slider-card-overlay">
+                            <button class="see-more-btn">See more →</button>
+                        </div>
+                    </div>
+                    <div class="slider-card">
+                        <img src="assets/slider/slider2.jpg" alt="Electric Vehicle 2" class="slider-card-img">
+                        <div class="slider-card-overlay">
+                            <button class="see-more-btn">See more →</button>
+                        </div>
+                    </div>
+                    <div class="slider-card-short">
+                        <img src="assets/slider/slider3.jpg" alt="Electric Vehicle 3" class="slider-card-img">
+                        <div class="slider-card-overlay">
+                            <button class="see-more-btn">See more →</button>
+                        </div>
+                    </div>
+                    <div class="slider-card">
+                        <img src="assets/slider/slider4.jpg" alt="Electric Vehicle 4" class="slider-card-img">
+                        <div class="slider-card-overlay">
+                            <button class="see-more-btn">See more →</button>
+                        </div>
+                    </div>
+                    <div class="slider-card-short">
+                        <img src="assets/slider/slider5.jpg" alt="Electric Vehicle 5" class="slider-card-img">
+                        <div class="slider-card-overlay">
+                            <button class="see-more-btn">See more →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="why-choose-section">
+        <div class="container content-container">
+            <h3>Why Choose Us ?</h3>
+
+            <div class="features-container">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img src="assets/icon/icon1.png" alt="Lightning Icon">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">Pilihan Merek & Model Lengkap</div>
+                        <p>Semua merek mobil listrik favorit Anda tersedia di satu showroom.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img src="assets/icon/icon2.png" alt="Steering Icon">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">Test Drive Kendaraan yang di Inginkan</div>
+                        <p>Rasakan sendiri performa mobil listrik favorit Anda sebelum memutuskan.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img src="assets/icon/icon3.png" alt="Leaf Icon">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">Komitmen pada Lingkungan</div>
+                        <p>Dengan setiap mobil listrik yang terjual, kita bersama selangkah lebih dekat menuju masa depan hijau.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Counting Section -->
+    <div class="container content-container counting-section">
+        <div class="row">
+            <div class="col-4">
+                <div class="count-item">
+                    <h3>28</h3>
+                    <p>Collaboration<br>with brands</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="count-item">
+                    <h3>500+</h3>
+                    <p>Customer</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="count-item">
+                    <h3>497</h3>
+                    <p>Customer<br>Happy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="customer-profiles">
+                    <div class="profile-img">
+                        <img src="assets/customer/customer.png" alt="profile">
+                    </div>
+                    <div class="profile-img">
+                        <img src="assets/customer/customer.png" alt="profile">
+                    </div>
+                    <div class="profile-img">
+                        <img src="assets/customer/customer.png" alt="profile">
+                    </div>
+                    <div class="customer-text">
+                        <h4>Million of happy customers</h4>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collaboration Section -->
+    <div class="container content-container collab-section">
+        <h3>Our collaboration with brands</h3>
+
+        <div class="collab-tabs">
+            <button class="collab-tab active" onclick="showTab('vehicle')">Vehicle</button>
+            <button class="collab-tab" onclick="showTab('electric')">Electric</button>
+        </div>
+
+        <div id="vehicle-brands" class="brand-grid">
+            <div class="brand-item"><img src="assets/brand/vehicle/BMW.png" alt="Brand 1" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/BYD.png" alt="Brand 2" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Chery.png" alt="Brand 3" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/DENZA.png" alt="Brand 4" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Maka.png" alt="Brand 5" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Mercedes.png" alt="Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Polytron.png" alt="Brand 7" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/U-Winfly.png" alt="Brand 8" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/VinFast.png" alt="Brand 9" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Volta.png" alt="Brand 8" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Wuling.png" alt="Brand 9" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/vehicle/Yadea.png" alt="Brand 9" class="brand-logo"></div>
+        </div>
+
+        <div id="electric-brands" class="brand-grid" style="display: none;">
+            <div class="brand-item"><img src="assets/brand/electronic/Xiaomi.png" alt="Electric Brand 1" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/iPhone.png" alt="Electric Brand 2" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Samsung.png" alt="Electric Brand 3" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Asus.png" alt="Electric Brand 4" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Acer.png" alt="Electric Brand 5" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Lenovo.png" alt="Electric Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Poco.png" alt="Electric Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Tecno.png" alt="Electric Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Vivo.png" alt="Electric Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Oppo.png" alt="Electric Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Advan.png" alt="Electric Brand 6" class="brand-logo"></div>
+            <div class="brand-item"><img src="assets/brand/electronic/Infinix.png" alt="Electric Brand 6" class="brand-logo"></div>
+        </div>
+    </div>
+
+    <!-- Most Searched Section -->
+    <div class="container content-container most-searched-section">
+        <div class="strip-divider"></div>
+
+        <h3 class="text-center my-4">The Most Searched Vehicle</h3>
+
+        <div class="search-tabs">
+            <button class="search-tab active">In Stock</button>
+            <button class="search-tab">Sedan</button>
+            <button class="search-tab">SUV</button>
+            <button class="search-tab">Motorcycle</button>
+        </div>
+
+        <div class="row">
+                <!-- Vehicle Card 1 -->
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/vehicles/wuling/air-ev/Views.png" class="car-img" alt="Wuling Air EV">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Wuling</h6>
+                            <p>New Air Ev Lite Long Range</p>
+                            <div class="vehicle-specs">
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <div class="spec-label">Speed</div>
+                                    <div class="spec-value">20 Miles</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="spec-label">Power</div>
+                                    <div class="spec-value">Electric</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="spec-label">Seat</div>
+                                    <div class="spec-value">2 Seat</div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 194.000.000</span>
+                                <a href="wuling-air-ev.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 2 -->
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/vehicles/vehicle1.png" class="car-img" alt="Wuling Binguo EV">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Wuling</h6>
+                            <p>Binguo EV Standard Range</p>
+                            <div class="vehicle-specs">
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <div class="spec-label">Speed</div>
+                                    <div class="spec-value">25 Miles</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="spec-label">Power</div>
+                                    <div class="spec-value">Electric</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="spec-label">Seat</div>
+                                    <div class="spec-value">5 Seat</div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 238.000.000</span>
+                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 3 -->
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/vehicles/vehicle1.png" class="car-img" alt="Wuling Cloud EV">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Wuling</h6>
+                            <p>Cloud EV Long Range</p>
+                            <div class="vehicle-specs">
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <div class="spec-label">Speed</div>
+                                    <div class="spec-value">30 Miles</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="spec-label">Power</div>
+                                    <div class="spec-value">Electric</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="spec-label">Seat</div>
+                                    <div class="spec-value">5 Seat</div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 358.000.000</span>
+                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotbar -->
+    <div class="hotbar">
+        <div class="hotbar-item">
+            <div class="hotbar-icon"><i class="bi bi-receipt"></i></div>
+            <small>Transaction</small>
+        </div>
+        <div class="hotbar-item active">
+            <div class="hotbar-icon"><i class="bi bi-house-door"></i></div>
+            <small>Home</small>
+        </div>
+        <div class="hotbar-item">
+            <div class="hotbar-icon"><i class="bi bi-person"></i></div>
+            <small>Account</small>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showTab(tab) {
+            document.getElementById('vehicle-brands').style.display = tab === 'vehicle' ? 'grid' : 'none';
+            document.getElementById('electric-brands').style.display = tab === 'electric' ? 'grid' : 'none';
+
+            document.querySelectorAll('.collab-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+          // SCRIPT TAMBAHAN — UNTUK TAB KATEGORI MOST SEARCHED
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const searchTabs = document.querySelectorAll('.search-tab');
+
+            searchTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+
+                    // Hilangkan kelas aktif di semua tab
+                    searchTabs.forEach(t => t.classList.remove('active'));
+
+                    // Tambah kelas aktif pada yang diklik
+                    this.classList.add('active');
+
+                    // Ambil kategori
+                    const category = this.innerText.trim().toLowerCase();
+
+                    // Nanti bisa diarahkan ke filter produk
+                    console.log("Kategori dipilih:", category);
+                });
+            });
+
+            // EVENT UNTUK BUTTON DETAILS — MENUJU HALAMAN DETAIL
+            document.querySelectorAll('.details-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const productId = this.getAttribute('data-id');
+                    window.location.href = `product-detail.html?id=${productId}`;
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
