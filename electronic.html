@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Dream Car - OKEEV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            background-color: white;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: 80px;
+        }
+
+        .navbar-custom {
+            background-color: var(--dark-bg);
+            padding: 1rem 1rem 1.5rem 1rem;
+            border-radius: 0 0 25px 25px;
+        }
+
+        .navbar-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box {
+            background-color: white;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .notif-btn {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #FF6B6B;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .title-text {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+            font-family: 'Oxanium', sans-serif;
+        }
+
+        .subtitle-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .content-section {
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            touch-action: pan-y;
+        }
+
+        .brands-slider {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0.8rem;
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .brand-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 0.8rem 0.4rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+        }
+
+        .brand-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .brand-logo {
+            width: 100%;
+            height: 100%;
+            max-width: 50px;
+            max-height: 50px;
+            object-fit: contain;
+        }
+
+        .pagination-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d0d0d0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--light-green);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /*Most Search*/
+        .most-searched-section {
+            padding: 20px 0 40px 0;
+        }
+
+        .most-searched-section h3 {
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+        }
+
+        .strip-divider {
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-green));
+            margin: 20px 0;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            border-bottom: 2px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .search-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .search-tab.active {
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Vehicle Card */
+        .vehicle-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .vehicle-img {
+            display: flex;
+            width: 100%;
+            height: 200px;
+            background: #f5f5f5;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .car-img {
+            width: 85%;
+            height: auto;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+        .vehicle-info {
+            padding: 20px;
+        }
+
+        .vehicle-specs {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            margin: 15px 0;
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .vehicle-price {
+            font-family: 'Oxanium', sans-serif;
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .details-btn {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .details-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Hotbar */
+        .hotbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        .hotbar-item {
+            text-align: center;
+            color: #666;
+            cursor: pointer;
+            flex: 1;
+            text-decoration: none;
+        }
+
+        .hotbar-item.active {
+            color: var(--primary-blue);
+        }
+
+        .hotbar-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .brands-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <div class="navbar-top">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="search-box">
+                <i class="fas fa-search text-muted me-2"></i>
+                <input type="text" placeholder="Search in Cars">
+            </div>
+            <button class="notif-btn">
+                <i class="fas fa-bell" style="color: var(--primary-blue);"></i>
+                <span class="notif-badge"></span>
+            </button>
+        </div>
+        <div>
+            <h1 class="title-text">Find Your Dream Device Only at OKEEV</h1>
+            <p class="subtitle-text">Lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="content-section">
+        <!-- Brands Carousel -->
+        <div class="carousel-container">
+            <div class="brands-slider" id="brandsSlider">
+                <!-- Page 1 -->
+                <div class="brands-grid">
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/iPhone.png" alt="logo1" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Acer.png" alt="logo2" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Advan.png" alt="logo3" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Asus.png" alt="logo4" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Infinix.png" alt="logo5" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Lenovo.png" alt="logo6" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Oppo.png" alt="U-logo7" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/electronic/Samsung.png" alt="logo8" class="brand-logo">
+                    </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="brands-grid">
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Wuling.png" alt="logo9" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Polytron.png" alt="logo10" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Toyota.png" alt="logo11" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Honda.png" alt="logo12" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Hyundai.png" alt="logo13" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Kia.png" alt="logo14" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Suzuki.png" alt="logo15" class="brand-logo">
+                    </div>
+                    <div class="brand-item">
+                        <img src="assets/brand/vehicle/Mitsubishi.png" alt="logo16" class="brand-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="pagination-dots" id="paginationDots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+        </div>
+
+        <!-- Most Searched Section -->
+        <div class="most-searched-section">
+            <h3>The newest motor at OKEEV</h3>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/product/electronic/brand/apple/image.png" class="car-img" alt="Chery Omoda">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Iphone 16</h6>
+                            <p>Ultra HD</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 24.500.000</span>
+                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/product/electronic/brand/apple/image.png" class="car-img" alt="Wuling Air EV">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Wuling</h6>
+                            <p>New Air Ev Lite Long Range</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 194.000.000</span>
+                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/product/electronic/brand/apple/image.png" class="car-img" alt="Chery Omoda">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Chery - Omoda</h6>
+                            <p>J6 IWD Phantom Edition</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 615.500.000</span>
+                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="vehicle-card">
+                        <div class="vehicle-img">
+                            <img src="assets/product/electronic/brand/apple/image.png" class="car-img" alt="Chery Omoda">
+                        </div>
+                        <div class="vehicle-info">
+                            <h6>Chery - Omoda</h6>
+                            <p>J6 IWD Phantom Edition</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="vehicle-price">IDR 615.500.000</span>
+                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotbar -->
+    <div class="hotbar">
+        <a href="transaction.html" class="hotbar-item">
+            <div class="hotbar-icon"><i class="bi bi-receipt"></i></div>
+            <small>Transaction</small>
+        </a>
+        <a href="index.html" class="hotbar-item active">
+            <div class="hotbar-icon"><i class="bi bi-house-door-fill"></i></div>
+            <small>Home</small>
+        </a>
+        <a href="account.html" class="hotbar-item">
+            <div class="hotbar-icon"><i class="bi bi-person"></i></div>
+            <small>Account</small>
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentSlide = 0;
+        const slider = document.getElementById('brandsSlider');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = 2;
+        let startX = 0;
+        let isDragging = false;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Touch events for mobile swipe
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        }, { passive: true });
+
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+        }, { passive: true });
+
+        slider.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                } else if (diff < 0 && currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+
+            isDragging = false;
+        }, { passive: true });
+
+        // Mouse events for desktop drag
+        slider.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            isDragging = true;
+            slider.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+
+            const endX = e.clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                } else if (diff < 0 && currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+
+            isDragging = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.style.cursor = 'grab';
+    </script>
+</body>
+</html>

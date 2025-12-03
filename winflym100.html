@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wuling Air EV - Car Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oxanium', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .main-image-container {
+            background: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 500px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .main-image:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            padding: 15px 20px;
+            overflow-x: auto;
+            background: white;
+            margin-bottom: 2px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover {
+            border-color: var(--light-green);
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary-blue);
+        }
+
+        .car-info {
+            background: white;
+            padding: 20px;
+            margin-bottom: 2px;
+        }
+
+        .car-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 10px;
+        }
+
+        .car-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--light-green);
+            border: 2px solid var(--light-green);
+        }
+
+        .btn-outline:hover {
+            background: var(--light-green);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--light-green);
+            color: var(--dark-bg);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: #2dd4b0;
+        }
+
+        .btn-order {
+            width: 100%;
+            background: var(--light-green);
+            color: var(--dark-bg);
+        }
+
+        .btn-order:hover {
+            background: #2dd4b0;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--light-green);
+        }
+
+        .tab-content {
+            background: white;
+            padding: 20px;
+            margin-bottom: 2px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--light-green);
+            margin-bottom: 15px;
+        }
+
+        .feature-section {
+            margin-bottom: 25px;
+        }
+
+        .feature-section h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .feature-list {
+            list-style: none;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .feature-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .color-selector {
+            margin: 20px 0;
+        }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 300px;
+        }
+
+        .color-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-option.two-tone {
+            background: linear-gradient(to bottom, #000 50%, #fff 50%);
+        }
+
+        .color-option.active {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 10px rgba(33, 58, 148, 0.5);
+        }
+
+        .color-name {
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .spec-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .spec-label {
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 5px;
+        }
+
+        .spec-value {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .credit-calculator-section {
+            background: var(--dark-bg);
+            padding: 25px 20px;
+            margin-top: 2px;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calculator-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .powered-by {
+            font-size: 12px;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .calculator-desc {
+            font-size: 13px;
+            color: #ddd;
+            line-height: 1.5;
+        }
+
+        .calculator-intro {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .calculator-intro p {
+            color: white;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .calculator-form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            font-family: 'Oxanium', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-bg);
+        }
+
+        .form-input:focus {
+            outline: 2px solid var(--light-green);
+        }
+
+        .tenure-selector {
+            position: relative;
+        }
+
+        .tenure-selector select {
+            appearance: none;
+            padding-right: 40px;
+        }
+
+        .tenure-selector .arrow {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-bg);
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        .calculator-note {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .calculator-note p {
+            color: white;
+            font-size: 11px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .calculator-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .calculator-result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .result-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">←</button>
+        <h1 class="header-title">Motor Details</h1>
+    </div>
+
+    <div class="main-image-container">
+        <img id="mainCarImage" src="assets/vehicles/vehicle2.png" alt="Wuling Air EV" class="main-image" onclick="openModal()">
+    </div>
+
+    <div class="thumbnail-container">
+        <img src="assets/vehicles/vehicle2.png" alt="Interior Dashboard" class="thumbnail active" onclick="changeMainImage('assets/vehicles/vehicle2.png', this)">
+        <img src="assets/slider/slider3.jpg" alt="Interior Seats" class="thumbnail" onclick="changeMainImage('assets/slider/slider3.jpg', this)">
+        <img src="assets/vehicles/vehicle2.png" alt="Steering Wheel" class="thumbnail" onclick="changeMainImage('assets/vehicles/vehicle2.png', this)">
+    </div>
+
+    <div class="car-info">
+        <div class="car-name">New U-Winfly M100</div>
+        <div class="car-price">IDR 194.000.000</div>
+
+        <div class="button-group">
+            <button class="btn btn-outline" onclick="location.href='test-drive.html'">
+                Test Drive
+            </button>
+            <button class="btn btn-primary" onclick="location.href='cart.html'">
+                Add to Cart
+            </button>
+        </div>
+
+        <button class="btn btn-order" onclick="location.href='order.html'">Order Now</button>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('technology')">Technology</button>
+        <button class="tab" onclick="switchTab('feature')">Feature</button>
+        <button class="tab" onclick="switchTab('color')">Color</button>
+        <button class="tab" onclick="switchTab('spec')">Spec</button>
+    </div>
+
+    <div class="tab-content">
+        <!-- Technology Tab -->
+        <div id="technology" class="tab-panel active">
+            <div class="feature-title">Technology</div>
+
+            <div class="feature-section">
+                <h3>Easy to Drive</h3>
+                <div class="feature-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque cupiditate eum necessitatibus.
+                </div>
+                <div class="feature-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo, dolor?
+                </div>
+                <img src="assets/vehicles/wuling/air-ev/Content1.png" alt="Easy to Drive" class="feature-image">
+            </div>
+
+            <div class="feature-section">
+                <h3>Easy to Own</h3>
+                <div class="feature-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. At iusto commodi blanditiis.
+                </div>
+            </div>
+
+            <div class="feature-section">
+                <h3>Easy to Charge</h3>
+                <div class="feature-description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus magni corporis fuga aliquam animi quibusdam mollitia sequi sint omnis ipsa!
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Tab -->
+        <div id="feature" class="tab-panel">
+            <div class="feature-title">Wuling Feature</div>
+
+            <div class="feature-section">
+                <h3>Main Battery & Powertrain</h3>
+                <ul class="feature-list">
+                    <li>• Integrated Floating Widescreen</li>
+                    <li>• Exterior</li>
+                    <li>• Interior</li>
+                    <li>• Rear Parking Camera</li>
+                </ul>
+            </div>
+
+            <div class="feature-section">
+                <h3>Proven & Tested Battery, IP67</h3>
+                <img src="assets/vehicles/wuling/air-ev/Content2.png" alt="Battery IP67" class="feature-image">
+                <div class="feature-description">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus, beatae.
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Tab -->
+        <div id="color" class="tab-panel">
+            <div class="feature-title">Wuling Color</div>
+
+            <div class="main-image-container">
+                <img id="colorCarImage" src="assets/vehicles/vehicle2.png" alt="Wuling Air EV" class="main-image">
+            </div>
+
+            <div class="color-selector">
+                <div class="color-options">
+                    <div class="color-option two-tone active"
+                         style="background: linear-gradient(to bottom, #000 50%, #fff 50%);"
+                         onclick="changeColor('pristine-white', this)"></div>
+                    <div class="color-option two-tone"
+                         style="background: linear-gradient(to bottom, #000 50%, #666 50%);"
+                         onclick="changeColor('gray', this)"></div>
+                    <div class="color-option"
+                         style="background: linear-gradient(135deg, #FFD700, #FFA500);"
+                         onclick="changeColor('gold', this)"></div>
+                    <div class="color-option two-tone"
+                         style="background: linear-gradient(to bottom, #000 50%, #D4A574 50%);"
+                         onclick="changeColor('brown', this)"></div>
+                    <div class="color-option two-tone"
+                         style="background: linear-gradient(to bottom, #000 50%, #4169E1 50%);"
+                         onclick="changeColor('blue', this)"></div>
+                    <div class="color-option"
+                         style="background: #000;"
+                         onclick="changeColor('black', this)"></div>
+                </div>
+                <div class="color-name">Pristine White</div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-outline" onclick="location.href='test-drive.html'">
+                    🚗 Test Drive
+                </button>
+                <button class="btn btn-order" onclick="location.href='order.html'">Order Now</button>
+            </div>
+        </div>
+
+        <!-- Specification Tab -->
+        <div id="spec" class="tab-panel">
+            <div class="feature-title">Wuling Specification</div>
+
+            <div class="spec-item">
+                <div class="spec-label">Dimension</div>
+                <div class="spec-value">Length x Width x Height (mm)</div>
+                <div class="spec-value">2.974 x 1.505 x 1.631</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Wheelbase (mm)</div>
+                <div class="spec-value">2.010</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Seat Capacity</div>
+                <div class="spec-value">4</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Suspension</div>
+                <div class="spec-value">McPherson (Front) + 3-link coil spring (Rear)</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Wheel and Tire</div>
+                <div class="spec-value">12" steel wheel with full cap; 145/70R12</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Brakes</div>
+                <div class="spec-value">Disc (Front) + Drum (Rear)</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Steering</div>
+                <div class="spec-value">Electric Power Steering</div>
+            </div>
+
+        </div>
+
+        <!-- Fitur Tab-->
+         <div id="Fitur" class="tab-panel">
+            <div class="feature-title">Fitur</div>
+
+            <div class="spec-item">
+                <div class="spec-label">Dimension</div>
+                <div class="spec-value">Length x Width x Height (mm)</div>
+                <div class="spec-value">2.974 x 1.505 x 1.631</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Wheelbase (mm)</div>
+                <div class="spec-value">2.010</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Seat Capacity</div>
+                <div class="spec-value">4</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Suspension</div>
+                <div class="spec-value">McPherson (Front) + 3-link coil spring (Rear)</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Wheel and Tire</div>
+                <div class="spec-value">12" steel wheel with full cap; 145/70R12</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Brakes</div>
+                <div class="spec-value">Disc (Front) + Drum (Rear)</div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-label">Steering</div>
+                <div class="spec-value">Electric Power Steering</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- Credit Calculator Section -->
+    <div class="credit-calculator-section">
+        <div class="calculator-header">
+            <h2>CREDIT CALCULATOR</h2>
+            <p class="powered-by">Powered by <span style="color: var(--light-green);">OKEEV FINANCE</span></p>
+            <p class="calculator-desc">Our internal loans guarantee flexible financing options at competitive rates.</p>
+        </div>
+
+        <div class="calculator-intro">
+            <p>Calculate monthly installments that fit your budget by setting the down payment and loan period.</p>
+        </div>
+
+        <div class="calculator-form">
+            <div class="form-group">
+                <label>Motor Price</label>
+                <input type="text" class="form-input" value="Rp 149.000.000" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Loan Amount</label>
+                <input type="text" class="form-input" id="loanAmount" value="Rp 160.000.000" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>First Payment</label>
+                <input type="text" class="form-input" id="firstPayment" value="Rp 55.000.000">
+            </div>
+
+            <div class="form-group">
+                <label>Interest Rate</label>
+                <input type="text" class="form-input" id="interestRate" value="10.96 %">
+            </div>
+
+            <div class="form-group">
+                <label>Tenure</label>
+                <div class="tenure-selector">
+                    <select class="form-input" id="tenure">
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="4">4 Years</option>
+                        <option value="5">5 Years</option>
+                    </select>
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-note">
+            <p><strong>Important note:</strong> Requirements may vary from bank to bank. This calculation is purely a simulation. For further details, please contact us.</p>
+            <p>For cars outside Jakarta, the above calculation is not binding. Additional shipping costs and regional taxes may apply to the calculation.</p>
+            <p>This above calculation applies to a minimum down payment of not 10,000,000</p>
+        </div>
+
+        <div class="calculator-result">
+            <div class="result-label">Price</div>
+            <div class="result-price">Rp 194.00.000</div>
+        </div>
+
+        <div class="button-group" style="margin-top: 20px;">
+            <button class="btn btn-outline" onclick="location.href='test-drive.html'">Test Drive</button>
+            <button class="btn btn-order" onclick="location.href='order.html'">Bayer Now</button>
+        </div>
+    </div>
+
+    <!-- Modal for Full Image -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img id="modalImage" src="" alt="Full Image" class="modal-image">
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching
+        function switchTab(tabName) {
+            // Remove active class from all tabs and panels
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+            // Add active class to selected tab and panel
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Change Main Image from Thumbnails
+        function changeMainImage(src, element) {
+            document.getElementById('mainCarImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Color Selection
+        const colorNames = {
+            'pristine-white': 'Pristine White',
+            'gray': 'Cloudy Gray',
+            'gold': 'Dazzle Gold',
+            'brown': 'Aurora Brown',
+            'blue': 'Angkasa Blue',
+            'black': 'Starry Black'
+        };
+
+        function changeColor(color, element) {
+            const imagePath = `assets/wuling-${color}.png`;
+            document.getElementById('colorCarImage').src = imagePath;
+            document.getElementById('mainCarImage').src = imagePath;
+
+            document.querySelectorAll('.color-option').forEach(option => option.classList.remove('active'));
+            element.classList.add('active');
+
+            document.querySelector('.color-name').textContent = colorNames[color];
+        }
+
+        // Modal Functions
+        function openModal() {
+            const mainImage = document.getElementById('mainCarImage').src;
+            document.getElementById('modalImage').src = mainImage;
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
