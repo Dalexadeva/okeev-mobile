@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Keranjang Belanja</title>
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+            --price-red: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--dark-bg);
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .select-all {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--light-green);
+            border-radius: 4px;
+            margin-right: 12px;
+            cursor: pointer;
+            position: relative;
+            background: var(--light-green);
+            flex-shrink: 0;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox.unchecked {
+            background: white;
+            border: 2px solid #ddd;
+        }
+
+        .checkbox.unchecked::after {
+            display: none;
+        }
+
+        .select-all label {
+            font-size: 14px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .cart-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .item-content {
+            display: flex;
+            gap: 15px;
+        }
+
+        .item-checkbox {
+            padding-top: 5px;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 13px;
+            color: var(--dark-bg);
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .item-specs {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .item-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--price-red);
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .total-section {
+            text-align: left;
+        }
+
+        .total-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .total-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--price-red);
+        }
+
+        .buy-btn {
+            background: var(--light-green);
+            color: var(--dark-bg);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background: #2de0b5;
+            transform: scale(1.05);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 500px) {
+            .footer {
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">←</button>
+        <h1>Cart</h1>
+    </div>
+
+    <div class="container">
+        <div class="select-all">
+            <div class="checkbox-wrapper" onclick="toggleSelectAll()">
+                <div class="checkbox" id="selectAllCheckbox"></div>
+                <label>select all products</label>
+            </div>
+        </div>
+
+        <div class="cart-item">
+            <div class="item-content">
+                <div class="item-checkbox">
+                    <div class="checkbox" id="item1Checkbox" onclick="toggleItem(1)"></div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=200&h=200&fit=crop" alt="Laptop" class="item-image">
+                <div class="item-details">
+                    <div class="item-title">Laptop - Asus Zenbook A14 (UX3407)</div>
+                    <div class="item-specs">Asus Zenbook A14 (UX3407)</div>
+                    <div class="item-price">Rp 14.999.000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">
+            <div class="checkbox" id="footerCheckbox" onclick="toggleSelectAll()"></div>
+            <div class="total-section">
+                <div class="total-label">Total</div>
+                <div class="total-price" id="totalPrice">Rp 14.999.000</div>
+            </div>
+        </div>
+        <button class="buy-btn" onclick="checkout()">BUY</button>
+    </div>
+
+    <script>
+        let items = {
+            1: { selected: true, price: 14999000 }
+        };
+
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const footerCheckbox = document.getElementById('footerCheckbox');
+            const allSelected = selectAllCheckbox.classList.contains('unchecked');
+
+            if (allSelected) {
+                selectAllCheckbox.classList.remove('unchecked');
+                footerCheckbox.classList.remove('unchecked');
+                items[1].selected = true;
+                document.getElementById('item1Checkbox').classList.remove('unchecked');
+            } else {
+                selectAllCheckbox.classList.add('unchecked');
+                footerCheckbox.classList.add('unchecked');
+                items[1].selected = false;
+                document.getElementById('item1Checkbox').classList.add('unchecked');
+            }
+
+            updateTotal();
+        }
+
+        function toggleItem(id) {
+            items[id].selected = !items[id].selected;
+            const itemCheckbox = document.getElementById(`item${id}Checkbox`);
+
+            if (items[id].selected) {
+                itemCheckbox.classList.remove('unchecked');
+            } else {
+                itemCheckbox.classList.add('unchecked');
+            }
+
+            updateSelectAll();
+            updateTotal();
+        }
+
+        function updateSelectAll() {
+            const allSelected = Object.values(items).every(item => item.selected);
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const footerCheckbox = document.getElementById('footerCheckbox');
+
+            if (allSelected) {
+                selectAllCheckbox.classList.remove('unchecked');
+                footerCheckbox.classList.remove('unchecked');
+            } else {
+                selectAllCheckbox.classList.add('unchecked');
+                footerCheckbox.classList.add('unchecked');
+            }
+        }
+
+        function updateTotal() {
+            let total = 0;
+            Object.values(items).forEach(item => {
+                if (item.selected) {
+                    total += item.price;
+                }
+            });
+
+            document.getElementById('totalPrice').textContent =
+                'Rp ' + total.toLocaleString('id-ID');
+        }
+
+        function checkout() {
+            const selectedItems = Object.entries(items).filter(([id, item]) => item.selected);
+            if (selectedItems.length === 0) {
+                alert('Pilih minimal satu produk untuk checkout');
+                return;
+            }
+            alert('Proceeding to checkout...');
+        }
+
+        // Initialize
+        updateTotal();
+    </script>
+</body>
+</html>

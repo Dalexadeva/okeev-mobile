@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification - OKEEV</title>
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            padding: 8px;
+            margin-right: 16px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .notification-list {
+            padding: 16px;
+        }
+
+        .notification-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .notification-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            transform: translateX(4px);
+        }
+
+        .notification-card.unread {
+            background-color: #f0fffe;
+            border-left-color: var(--light-green);
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.order {
+            background-color: rgba(53, 245, 198, 0.2);
+            color: var(--light-green);
+        }
+
+        .notification-icon.test-drive {
+            background-color: rgba(33, 58, 148, 0.2);
+            color: var(--primary-blue);
+        }
+
+        .notification-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .notification-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: var(--light-green);
+            white-space: nowrap;
+            margin-left: 8px;
+        }
+
+        .notification-message {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .notification-details {
+            font-size: 13px;
+            color: var(--light-green);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .notification-details:hover {
+            text-decoration: underline;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background-color: #ff4444;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <div class="header-title">Notification</div>
+        </div>
+
+        <div class="notification-list">
+            <!-- Order Vehicle Notification -->
+            <div class="notification-card unread" onclick="openNotification(1)">
+                <div class="notification-header">
+                    <div class="notification-icon order">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title-row">
+                            <span class="notification-title">ORDER VEHICLE</span>
+                            <span class="notification-time">2:05 AM</span>
+                        </div>
+                        <div class="notification-message">
+                            You have placed an order 5 will immediately make payment for the WILLING vehicle - New Air Ev...
+                        </div>
+                        <div class="notification-details">Details...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Drive Notification -->
+            <div class="notification-card" onclick="openNotification(2)">
+                <div class="notification-header">
+                    <div class="notification-icon test-drive">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title-row">
+                            <span class="notification-title">TEST DRIVE</span>
+                            <span class="notification-time">Yesterday</span>
+                        </div>
+                        <div class="notification-message">
+                            You apply to do a test-drive of the WILLING vehicle - New Air Ev...
+                        </div>
+                        <div class="notification-details">Details...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional example notifications -->
+            <div class="notification-card" onclick="openNotification(3)">
+                <div class="notification-header">
+                    <div class="notification-icon order">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title-row">
+                            <span class="notification-title">PAYMENT CONFIRMED</span>
+                            <span class="notification-time">2 days ago</span>
+                        </div>
+                        <div class="notification-message">
+                            Your payment for ASUS Zenbook A1X has been confirmed. Your order is now being processed.
+                        </div>
+                        <div class="notification-details">Details...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function openNotification(id) {
+            // Remove unread status
+            event.currentTarget.classList.remove('unread');
+
+            // Show notification details
+            alert('Membuka detail notifikasi #' + id);
+
+            // Here you can navigate to detail page
+            // window.location.href = 'notification-detail.html?id=' + id;
+        }
+    </script>
+</body>
+</html>

@@ -15,12 +15,13 @@
         }
 
         body {
+
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-bottom: 80px;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
             padding-bottom: 80px;
+            padding-top: 150px;
         }
 
         html {
@@ -38,7 +39,10 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             padding: 15px 0;
             width: 100%;
-            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 500;
         }
 
         .navbar-custom .container {
@@ -120,7 +124,6 @@
         }
 
         .category-icon {
-
             width: 60px;
             height: 60px;
             background: #f0f0f0;
@@ -465,7 +468,7 @@
 
         /* Most Searched */
         .most-searched-section {
-            padding: 40px 0;
+            padding: 20px;
         }
 
         .most-searched-section h3 {
@@ -496,25 +499,34 @@
         }
 
         .search-tab.active {
-            color: var(--primary-blue);
-            border-bottom: 3px solid var(--primary-blue);
+            color: var(--dark-bg);
+            border-bottom: 3px solid var(--dark-bg);
             font-weight: bold;
         }
 
         /* Vehicle Card */
         .vehicle-card {
+            display: block;
             background: white;
             border: 1px solid #ddd;
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s ease;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
         }
 
         .vehicle-img {
             display: flex;
             width: 100%;
             height: 220px;
-            background: gray;
+            background: #f1f1f1;
             overflow: hidden;
             align-items: center;
             justify-content: center;
@@ -544,6 +556,12 @@
             text-align: center;
         }
 
+        .spec-icon svg {
+            width: 22px;
+            height: 22px;
+            margin-bottom: 4px;
+        }
+
         .spec-label {
             font-size: 12px;
             color: #666;
@@ -556,56 +574,56 @@
             font-size: 18px;
         }
 
-        .details-btn {
-            background: none;
-            border: none;
-            color: var(--primary-blue);
-            cursor: pointer;
-            float: right;
-        }
-
         /* Hotbar */
-        .hotbar {
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 200;
+        }
+
+        .bottom-nav-container {
+            max-width: 480px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
-            z-index: 1000;
+            padding: 12px 0;
         }
 
-        .hotbar-item {
-            text-align: center;
-            color: #666;
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             cursor: pointer;
-            flex: 1;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #999;
         }
 
-        .hotbar-item.active {
-            color: var(--primary-blue);
+        .nav-item:hover {
+            color: var(--light-green);
         }
 
-        .hotbar-icon {
-            font-size: 24px;
-            margin-bottom: 5px;
+        .nav-item.active {
+            color: var(--light-green);
         }
 
-        @media (max-width: 768px) {
-            .brand-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
 
-            .features-container {
-                flex-direction: column;
-            }
+        .nav-label {
+            font-size: 11px;
+        }
 
-            .feature-item {
-                min-width: 100%;
-            }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -620,7 +638,9 @@
                     <img src="assets/Okeev.png" alt="OKEEV Logo">
                 </div>
                 <button class="icon-btn">
-                    <i class="bi bi-bell"></i>
+                    <a href="notification.html">
+                        <i class="bi bi-bell"></i>
+                    </a>
                 </button>
             </div>
 
@@ -628,7 +648,9 @@
             <div class="navbar-bottom">
                 <input type="text" class="search-bar" placeholder="Search Vehicle/electronic">
                 <button class="icon-btn">
-                    <i class="bi bi-cart"></i>
+                    <a href="cart.html">
+                        <i class="bi bi-cart"></i>
+                    </a>
                 </button>
             </div>
         </div>
@@ -671,7 +693,7 @@
                                 <path fill="#30445C" d="M7.616 22q-.667 0-1.141-.475T6 20.386V3.615q0-.69.463-1.152T7.616 2h8.846q.666 0 1.14.475t.475 1.14v3.216q.373.04.648.31q.275.269.275.648v1.769q0 .379-.275.648t-.648.31v9.869q0 .666-.475 1.14t-1.14.475zm2.269-2.77h4.307q.213 0 .357-.143q.143-.144.143-.357t-.143-.356t-.357-.143H9.885q-.213 0-.357.144t-.143.356t.143.356t.357.144"/>
                             </svg>
                         </div>
-                        <small>Handphone</small>
+                        <small>Electronic</small>
                     </div>
                 </a>
             </div>
@@ -732,43 +754,88 @@
     </div>
 
     <!-- Why Choose Us -->
-    <div class="why-choose-section">
-        <div class="container content-container">
-            <h3>Why Choose Us ?</h3>
+    <div class="why-choose-section" style="position: relative; padding: 80px 0; overflow:hidden; background: white;">
 
-            <div class="features-container">
-                <div class="feature-item">
+        <!-- SVG sebagai background full kiri–kanan -->
+        <svg
+            viewBox="0 0 440 650"
+            xmlns="http://www.w3.org/2000/svg"
+            style="
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                object-fit:cover;
+                z-index:1;
+            "
+        >
+            <path d="M476 630C476 641.046 467.046 650 456 650H-10C-21.0457 650 -30 641.046 -30 630V70C-30 58.9543 -21.0457 50 -10 50H190.179C197.27 50 203.831 46.2451 207.423 40.131L225.202 9.86901C228.794 3.75491 235.355 0 242.446 0H456C467.046 0 476 8.95431 476 20V630Z"
+            fill="#30445C"/>
+        </svg>
+
+
+
+
+
+        <!-- Konten di atas SVG -->
+        <div class="container content-container" style="position: relative; z-index:2; margin-bottom: 10px;">
+
+            <h3 style="
+                color: var(--dark-bg);
+                font-weight:700;
+                margin-bottom:130px;
+                font-size:20px;
+                text-align:left;
+                padding-left:5px;
+
+            ">Why choose us?
+            </h3>
+
+            <div class="features-container" style="display:flex; flex-direction:column; gap:35px; padding-bottom:60px;">
+
+                <div class="feature-item" style="display:flex; gap:20px; margin-bottom:30px;">
                     <div class="feature-icon">
-                        <img src="assets/icon/icon1.png" alt="Lightning Icon">
+                        <img src="assets/icon/icon1.png" width="55" alt="Lightning Icon">
                     </div>
                     <div class="feature-content">
-                        <div class="feature-title">Pilihan Merek & Model Lengkap</div>
-                        <p>Semua merek mobil listrik favorit Anda tersedia di satu showroom.</p>
+                        <div class="feature-title" style="color:#35F5C6; font-weight:600;">
+                            Pilihan Merek & Model Lengkap
+                        </div>
+                        <p style="color:#fff;">Semua merek mobil listrik favorit Anda tersedia di satu showroom.</p>
                     </div>
                 </div>
 
-                <div class="feature-item">
+                <div class="feature-item" style="display:flex; gap:20px; margin-bottom:30px;">
                     <div class="feature-icon">
-                        <img src="assets/icon/icon2.png" alt="Steering Icon">
+                        <img src="assets/icon/icon2.png" width="55" alt="Steering Icon">
                     </div>
                     <div class="feature-content">
-                        <div class="feature-title">Test Drive Kendaraan yang di Inginkan</div>
-                        <p>Rasakan sendiri performa mobil listrik favorit Anda sebelum memutuskan.</p>
+                        <div class="feature-title" style="color:#35F5C6; font-weight:600;">
+                            Test Drive Kendaraan yang di Inginkan
+                        </div>
+                        <p style="color:#fff;">Rasakan sendiri performa mobil listrik favorit Anda sebelum memutuskan.</p>
                     </div>
                 </div>
 
-                <div class="feature-item">
+                <div class="feature-item" style="display:flex; gap:20px;">
                     <div class="feature-icon">
-                        <img src="assets/icon/icon3.png" alt="Leaf Icon">
+                        <img src="assets/icon/icon3.png" width="55" alt="Leaf Icon">
                     </div>
                     <div class="feature-content">
-                        <div class="feature-title">Komitmen pada Lingkungan</div>
-                        <p>Dengan setiap mobil listrik yang terjual, kita bersama selangkah lebih dekat menuju masa depan hijau.</p>
+                        <div class="feature-title" style="color:#35F5C6; font-weight:600;">
+                            Komitmen pada Lingkungan
+                        </div>
+                        <p style="color:#fff;">Dengan setiap mobil listrik yang terjual, kita bersama selangkah lebih dekat menuju masa depan hijau.</p>
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
+
+
 
     <!-- Counting Section -->
     <div class="container content-container counting-section">
@@ -870,141 +937,213 @@
         <div class="row">
                 <!-- Vehicle Card 1 -->
                 <div class="col-md-6 mb-3">
-                    <div class="vehicle-card">
+                    <a href="wuling-air-ev.html" class="vehicle-card">
                         <div class="vehicle-img">
-                            <img src="assets/vehicles/wuling/air-ev/Views.png" class="car-img" alt="Wuling Air EV">
+                            <img src="assets/product/vehicles/wuling/air-ev/Views.png" class="car-img" alt="Wuling Air EV">
                         </div>
+
                         <div class="vehicle-info">
                             <h6>Wuling</h6>
                             <p>New Air Ev Lite Long Range</p>
+
                             <div class="vehicle-specs">
+                                <!-- Speed -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-tachometer-alt"></i>
+                                        <!-- Speedometer SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <path d="M12 3a9 9 0 1 0 9 9" />
+                                            <path d="M12 12l4-2" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Speed</div>
                                     <div class="spec-value">20 Miles</div>
                                 </div>
+
+                                <!-- Power -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-bolt"></i>
+                                        <!-- Lightning Bolt SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Power</div>
                                     <div class="spec-value">Electric</div>
                                 </div>
+
+                                <!-- Seat -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-user"></i>
+                                        <!-- User SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <circle cx="12" cy="7" r="4" />
+                                            <path d="M6 21c0-4 3-7 6-7s6 3 6 7" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Seat</div>
                                     <div class="spec-value">2 Seat</div>
                                 </div>
                             </div>
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="vehicle-price">IDR 194.000.000</span>
-                                <a href="wuling-air-ev.html" class="details-btn">Details →</a>
+                                <P>Details →</P>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
+
 
                 <!-- Vehicle Card 2 -->
                 <div class="col-md-6 mb-3">
-                    <div class="vehicle-card">
+                    <a href="wuling-air-ev.html" class="vehicle-card">
                         <div class="vehicle-img">
-                            <img src="assets/vehicles/vehicle1.png" class="car-img" alt="Wuling Binguo EV">
+                            <img src="assets/product/vehicles/vehicle1.png" class="car-img" alt="Wuling Air EV">
                         </div>
+
                         <div class="vehicle-info">
                             <h6>Wuling</h6>
-                            <p>Binguo EV Standard Range</p>
+                            <p>New Air Ev Lite Long Range</p>
+
                             <div class="vehicle-specs">
+                                <!-- Speed -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-tachometer-alt"></i>
+                                        <!-- Speedometer SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <path d="M12 3a9 9 0 1 0 9 9" />
+                                            <path d="M12 12l4-2" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Speed</div>
-                                    <div class="spec-value">25 Miles</div>
+                                    <div class="spec-value">20 Miles</div>
                                 </div>
+
+                                <!-- Power -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-bolt"></i>
+                                        <!-- Lightning Bolt SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Power</div>
                                     <div class="spec-value">Electric</div>
                                 </div>
+
+                                <!-- Seat -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-user"></i>
+                                        <!-- User SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <circle cx="12" cy="7" r="4" />
+                                            <path d="M6 21c0-4 3-7 6-7s6 3 6 7" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Seat</div>
-                                    <div class="spec-value">5 Seat</div>
+                                    <div class="spec-value">2 Seat</div>
                                 </div>
                             </div>
+
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="vehicle-price">IDR 238.000.000</span>
-                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                                <span class="vehicle-price">IDR 194.000.000</span>
+                                <P>Details →</P>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Vehicle Card 3 -->
                 <div class="col-md-6 mb-3">
-                    <div class="vehicle-card">
+                    <a href="wuling-air-ev.html" class="vehicle-card">
                         <div class="vehicle-img">
-                            <img src="assets/vehicles/vehicle1.png" class="car-img" alt="Wuling Cloud EV">
+                            <img src="assets/product/vehicles/vehicle1.png" class="car-img" alt="Wuling Air EV">
                         </div>
+
                         <div class="vehicle-info">
                             <h6>Wuling</h6>
-                            <p>Cloud EV Long Range</p>
+                            <p>New Air Ev Lite Long Range</p>
+
                             <div class="vehicle-specs">
+                                <!-- Speed -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-tachometer-alt"></i>
+                                        <!-- Speedometer SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <path d="M12 3a9 9 0 1 0 9 9" />
+                                            <path d="M12 12l4-2" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Speed</div>
-                                    <div class="spec-value">30 Miles</div>
+                                    <div class="spec-value">20 Miles</div>
                                 </div>
+
+                                <!-- Power -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-bolt"></i>
+                                        <!-- Lightning Bolt SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Power</div>
                                     <div class="spec-value">Electric</div>
                                 </div>
+
+                                <!-- Seat -->
                                 <div class="spec-item">
                                     <div class="spec-icon">
-                                        <i class="fas fa-user"></i>
+                                        <!-- User SVG -->
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                            <circle cx="12" cy="7" r="4" />
+                                            <path d="M6 21c0-4 3-7 6-7s6 3 6 7" />
+                                        </svg>
                                     </div>
                                     <div class="spec-label">Seat</div>
-                                    <div class="spec-value">5 Seat</div>
+                                    <div class="spec-value">2 Seat</div>
                                 </div>
                             </div>
+
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="vehicle-price">IDR 358.000.000</span>
-                                <a href="vehicle-detail.html" class="details-btn">Details →</a>
+                                <span class="vehicle-price">IDR 194.000.000</span>
+                                <P>Details →</P>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Hotbar -->
-    <div class="hotbar">
-        <a href="transaction.html" class="hotbar-item">
-            <div class="hotbar-icon"><i class="bi bi-receipt"></i></div>
-            <small>Transaction</small>
-        </a>
-        <a href="index.html" class="hotbar-item active">
-            <div class="hotbar-icon"><i class="bi bi-house-door-fill"></i></div>
-            <small>Home</small>
-        </a>
-        <a href="account.html" class="hotbar-item">
-            <div class="hotbar-icon"><i class="bi bi-person"></i></div>
-            <small>Account</small>
-        </a>
+    <div class="bottom-nav">
+        <div class="bottom-nav-container">
+            <a href="transaction.html" class="nav-item">
+                <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                <span class="nav-label">Transaction</span>
+            </a>
+            <a href="index.html" class="nav-item active">
+                <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="news.html" class="nav-item">
+                <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="nav-label">News</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+                <span class="nav-label">Profile</span>
+            </a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

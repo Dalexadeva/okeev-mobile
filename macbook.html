@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASUS Zenbook A14 - Product Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            padding-bottom: 120px;
+        }
+
+        .header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .main-image-container {
+            background: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 500px;
+            max-height: 350px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .main-image:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            padding: 15px 20px;
+            overflow-x: auto;
+            background: white;
+            margin-bottom: 2px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            background: #f8f8f8;
+        }
+
+        .thumbnail:hover {
+            border-color: var(--light-green);
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary-blue);
+        }
+
+        .product-info {
+            background: white;
+            padding: 20px;
+            margin-bottom: 2px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 5px;
+        }
+
+        .product-model {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--light-green);
+        }
+
+        .tab-content {
+            background: white;
+            padding: 20px;
+            margin-bottom: 2px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .spec-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--light-green);
+            margin-bottom: 20px;
+        }
+
+        .spec-section {
+            margin-bottom: 25px;
+        }
+
+        .spec-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .spec-value {
+            color: #333;
+            font-size: 14px;
+            text-align: right;
+            flex: 1.5;
+            line-height: 1.5;
+        }
+
+        /* Fixed Bottom Section */
+        .bottom-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 200;
+            padding: 15px 20px;
+        }
+
+        .price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .price-value {
+            font-family: 'Oxanium', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-cart {
+            background: white;
+            color: var(--light-green);
+            border: 2px solid var(--light-green);
+        }
+
+        .btn-cart:hover {
+            background: var(--light-green);
+            color: white;
+        }
+
+        .btn-order {
+            background: var(--light-green);
+            color: var(--dark-bg);
+            font-weight: 700;
+        }
+
+        .btn-order:hover {
+            background: #2dd4b0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-width: 800px;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="header-title">Product Details</h1>
+    </div>
+
+    <div class="main-image-container">
+        <svg id="mainImage" class="main-image" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg" onclick="openModal()">
+            <rect width="500" height="350" fill="#e0e0e0" rx="5"/>
+            <text x="250" y="175" text-anchor="middle" font-size="24" fill="#999">Macbook UHD</text>
+        </svg>
+    </div>
+
+    <div class="thumbnail-container">
+        <svg class="thumbnail active" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" onclick="changeMainImage(0, this)">
+            <rect width="80" height="80" fill="#e0e0e0" rx="5"/>
+            <text x="40" y="45" text-anchor="middle" font-size="16" fill="#999">1</text>
+        </svg>
+        <svg class="thumbnail" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" onclick="changeMainImage(1, this)">
+            <rect width="80" height="80" fill="#e0e0e0" rx="5"/>
+            <text x="40" y="45" text-anchor="middle" font-size="16" fill="#999">2</text>
+        </svg>
+        <svg class="thumbnail" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" onclick="changeMainImage(2, this)">
+            <rect width="80" height="80" fill="#e0e0e0" rx="5"/>
+            <text x="40" y="45" text-anchor="middle" font-size="16" fill="#999">3</text>
+        </svg>
+        <svg class="thumbnail" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" onclick="changeMainImage(3, this)">
+            <rect width="80" height="80" fill="#e0e0e0" rx="5"/>
+            <text x="40" y="45" text-anchor="middle" font-size="16" fill="#999">4</text>
+        </svg>
+    </div>
+
+    <div class="product-info">
+        <div class="product-name">ASUS Zenbook A14 (UX3407)</div>
+        <div class="product-model">Ultra-thin & lightweight laptop</div>
+        <div class="product-description">
+            ASUS Zenbook is one of the smallest and most compact laptops in the world. Designed for professionals and multimedia. Made with premium materials for superior portability.
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('warna')">Warna</button>
+        <button class="tab" onclick="switchTab('sistem')">Sistem Operasi</button>
+        <button class="tab" onclick="switchTab('processor')">Processor</button>
+        <button class="tab" onclick="switchTab('spec')">All Specs</button>
+    </div>
+
+    <div class="tab-content">
+        <!-- Warna Tab -->
+        <div id="warna" class="tab-panel active">
+            <div class="spec-title">Pilihan Warna</div>
+            <div class="spec-section">
+                <div class="spec-item">
+                    <div class="spec-label">Warna Tersedia</div>
+                    <div class="spec-value">Zephrite Beige<br>Ponder Gray</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sistem Operasi Tab -->
+        <div id="sistem" class="tab-panel">
+            <div class="spec-title">Sistem Operasi</div>
+            <div class="spec-section">
+                <div class="spec-item">
+                    <div class="spec-label">Operating System</div>
+                    <div class="spec-value">Windows 11 Home</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Office</div>
+                    <div class="spec-value">Microsoft Office Home and Student 2021 included</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Additional Software</div>
+                    <div class="spec-value">Windows 11 Pro (Copilot+ PC)<br>- Office Home and Student 2021</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processor Tab -->
+        <div id="processor" class="tab-panel">
+            <div class="spec-title">Processor & Performance</div>
+            <div class="spec-section">
+                <div class="spec-item">
+                    <div class="spec-label">Processor</div>
+                    <div class="spec-value">Snapdragon® X X1E-78-100 Processor (3GHz base, 12 cores, 8 Performance cores up to 3.4GHz, 4 Efficiency cores up to 3.4GHz, 42MB L3 cache, NPU up to 45TOPS)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Specs Tab -->
+        <div id="spec" class="tab-panel">
+            <div class="spec-title">Full Specifications</div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-microchip"></i>
+                    Processor
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">CPU</div>
+                    <div class="spec-value">Snapdragon® X X1E-78-100<br>3GHz, 12 cores, up to 45TOPS</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-tv"></i>
+                    Graphics
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">GPU</div>
+                    <div class="spec-value">Qualcomm® Adreno™ GPU</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-brain"></i>
+                    Neural Processor
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">NPU</div>
+                    <div class="spec-value">Qualcomm® Hexagon™ NPU</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-desktop"></i>
+                    Display
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Screen Size</div>
+                    <div class="spec-value">14.0-inch</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Resolution</div>
+                    <div class="spec-value">WUXGA (1920 x 1200) 16:10</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Panel Type</div>
+                    <div class="spec-value">IPS-level, Anti-glare display</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Brightness</div>
+                    <div class="spec-value">400nits</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Color Gamut</div>
+                    <div class="spec-value">100% sRGB color gamut</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Refresh Rate</div>
+                    <div class="spec-value">Auto-adaptive screen (30/48/60/70Hz)<br>Screen-to-body ratio: 84%</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-memory"></i>
+                    Memory
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">RAM</div>
+                    <div class="spec-value">16GB LPDDR5 on board</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-hdd"></i>
+                    Storage
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Storage</div>
+                    <div class="spec-value">512GB M.2 NVMe™ PCIe® 4.0 SSD</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-expand"></i>
+                    Expansion Slots
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Expansion</div>
+                    <div class="spec-value">1x M.2 2280 PCIe 4.0x4<br>(includes used)</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-plug"></i>
+                    I/O Ports
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">USB Type-A</div>
+                    <div class="spec-value">1x USB 3.2 Gen 2 Type-A</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">USB Type-C</div>
+                    <div class="spec-value">2x USB4 (support DisplayMode / power delivery)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Audio</div>
+                    <div class="spec-value">1x 3.5mm Combo Audio Jack<br>1x USB 3.2 Gen 2 Type-C</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Display Output</div>
+                    <div class="spec-value">2x USB4 (support Display Mode / power delivery 3.0)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">SD Card</div>
+                    <div class="spec-value">1x microSD card reader<br>(SD/SDHC/SDXC/UHS-I)</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-wifi"></i>
+                    Connectivity
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Wi-Fi</div>
+                    <div class="spec-value">Wi-Fi 7 (802.11be)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Bluetooth</div>
+                    <div class="spec-value">Bluetooth 5.4</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-video"></i>
+                    Camera
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Webcam</div>
+                    <div class="spec-value">1080P Full HD camera<br>IR camera for Windows Hello</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-volume-up"></i>
+                    Audio
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Speakers</div>
+                    <div class="spec-value">Built-in speaker<br>Built-in array microphone<br>harman/kardon certified</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-keyboard"></i>
+                    Input
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Keyboard</div>
+                    <div class="spec-value">Backlit Chiclet Keyboard<br>1.35mm Key-travel</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-battery-full"></i>
+                    Battery
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Capacity</div>
+                    <div class="spec-value">70WHrs, 4S1P, 4-cell Li-ion</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-plug"></i>
+                    Power Supply
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Adapter</div>
+                    <div class="spec-value">ø4.0, 65W AC Adapter<br>Output: 20V DC, 3.25A, 65W<br>Input: 100~240V AC, 50/60Hz universal</div>
+                </div>
+            </div>
+
+            <div class="spec-section">
+                <div class="spec-section-title">
+                    <i class="fas fa-ruler-combined"></i>
+                    Dimensions & Weight
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Dimensions</div>
+                    <div class="spec-value">31.09 x 21.69 x 1.49 cm</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Weight</div>
+                    <div class="spec-value">1.20 kg</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Bottom Section -->
+    <div class="bottom-fixed">
+        <div class="price-section">
+            <div class="price-label">Harga</div>
+            <div class="price-value">Rp 14.999.000</div>
+        </div>
+        <div class="button-group">
+            <button class="btn btn-cart" onclick="location.href='cart.html'">
+                <i class="fas fa-shopping-cart"></i>
+                + Cart
+            </button>
+            <button class="btn btn-order" onclick="location.href='order.html'">
+                Order Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for Full Image -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <svg id="modalImage" class="modal-image" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+    </div>
+
+    <script>
+        // Array of different SVG views
+        const imageViews = [
+            { text: 'Macbook UHD', desc: 'Front View' },
+            { text: 'Side View', desc: 'Side Profile' },
+            { text: 'Keyboard', desc: 'Keyboard Layout' },
+            { text: 'Display', desc: 'Screen Display' }
+        ];
+
+        // Tab Switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Change Main Image from Thumbnails
+        function changeMainImage(index, element) {
+            const mainImage = document.getElementById('mainImage');
+            const view = imageViews[index];
+
+            // Update SVG content
+            mainImage.innerHTML = `
+                <rect width="500" height="350" fill="#e0e0e0" rx="5"/>
+                <text x="250" y="160" text-anchor="middle" font-size="24" fill="#999">${view.text}</text>
+                <text x="250" y="190" text-anchor="middle" font-size="14" fill="#666">${view.desc}</text>
+            `;
+
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Modal Functions
+        function openModal() {
+            const mainImage = document.getElementById('mainImage');
+            const modalImage = document.getElementById('modalImage');
+
+            // Clone the SVG for modal
+            modalImage.innerHTML = mainImage.innerHTML;
+            modalImage.setAttribute('viewBox', '0 0 500 350');
+            modalImage.style.width = '100%';
+            modalImage.style.maxWidth = '800px';
+
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
