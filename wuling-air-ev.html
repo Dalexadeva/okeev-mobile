@@ -22,6 +22,7 @@
             font-family: 'Oxanium', sans-serif;
             background: #f5f5f5;
             color: #333;
+            padding-bottom: 140px;
         }
 
         .header {
@@ -405,6 +406,17 @@
             margin-bottom: 0;
         }
 
+        .calculator-result-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark-bg);
+            padding: 15px 20px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+            z-index: 99;
+        }
+
         .calculator-result {
             background: white;
             padding: 15px;
@@ -499,7 +511,7 @@
             </button>
         </div>
 
-        <button class="btn btn-order" onclick="location.href='order.html'">Order Now</button>
+        <button class="btn btn-order" onclick="location.href='checkout wuling-air-ev.html'">Order Now</button>
     </div>
 
     <div class="tabs">
@@ -699,15 +711,18 @@
             <p>For cars outside Jakarta, the above calculation is not binding. Additional shipping costs and regional taxes may apply to the calculation.</p>
             <p>This above calculation applies to a minimum down payment of not 10,000,000</p>
         </div>
+    </div>
 
+    <!-- Fixed Calculator Result at Bottom -->
+    <div class="calculator-result-fixed">
         <div class="calculator-result">
-            <div class="result-label">Price</div>
-            <div class="result-price">Rp 194.00.000</div>
+            <div class="result-label">Monthly Installment</div>
+            <div class="result-price">Rp 4.850.000</div>
         </div>
 
-        <div class="button-group" style="margin-top: 20px;">
+        <div class="button-group">
             <button class="btn btn-outline" onclick="location.href='test-drive.html'">Test Drive</button>
-            <button class="btn btn-order" onclick="location.href='order.html'">Bayer Now</button>
+            <button class="btn btn-order" onclick="location.href='checkout wuling-air-ev.html'">Order Now</button>
         </div>
     </div>
 

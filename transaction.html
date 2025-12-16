@@ -321,20 +321,22 @@
             <div id="waiting-content" class="category-content">
                 <div class="section-title">Waiting For Confirmation</div>
 
-                <div class="transaction-card" onclick="viewTransaction(1)">
-                    <div class="transaction-header">
-                        <div class="transaction-time">2:00 AM</div>
-                    </div>
-                    <div class="transaction-body">
-                        <div class="transaction-image">
-                            <img src="assets/product/vehicles/vehicle1.png" alt="Car">
+                <a href="payment.html">
+                    <div class="transaction-card" onclick="viewTransaction(1)">
+                        <div class="transaction-header">
+                            <div class="transaction-time">2:00 AM</div>
                         </div>
-                        <div class="transaction-info">
-                            <div class="transaction-type">Menunggu Pembayaran</div>
-                            <div class="transaction-title">New Air Ev Lite Long Range</div>
+                        <div class="transaction-body">
+                            <div class="transaction-image">
+                                <img src="assets/product/vehicles/vehicle1.png" alt="Car">
+                            </div>
+                            <div class="transaction-info">
+                                <div class="transaction-type">Menunggu Pembayaran</div>
+                                <div class="transaction-title">New Air Ev Lite Long Range</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <div class="transaction-card" onclick="viewTransaction(2)">
                     <div class="transaction-header">
@@ -441,10 +443,6 @@
             document.getElementById(contentId).classList.remove('hidden');
 
             currentCategory = category;
-        }
-
-        function viewTransaction(id) {
-            alert('Membuka detail transaksi #' + id);
         }
 
         // Handle scroll to show/hide bottom nav (optional enhancement)

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKEEV - Lupa Kata Sandi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #213A94;
+            --dark-bg: #30445C;
+            --light-green: #35F5C6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #00D4FF 0%, #00C4F0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        .container {
+            background: linear-gradient(180deg, #00D4FF 0%, #00C4F0 100%);
+            width: 100%;
+            max-width: 375px;
+            min-height: 100vh;
+            padding: 50px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 125px;
+            left: 25px;
+            background: var(--dark-bg);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            color: white;
+            font-size: 13px;
+            margin-bottom: 35px;
+            font-weight: 400;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        input::placeholder {
+            color: #D3D3D3;
+            font-weight: 400;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: #3D4F5C;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #4A5D6B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="login.html" class="back-btn">←</a>
+
+        <h2 class="title">Lupa Kata Sandi</h2>
+
+        <p class="subtitle">
+            Apa alamat login terdapat kata sandi anda?<br>Masukan email anda
+        </p>
+
+        <form>
+            <div class="form-group">
+                <input type="email" placeholder="Masukan email anda" required>
+            </div>
+
+            <a href="reset-password.html" class="btn-primary">Selanjutnya</a>
+        </form>
+    </div>
+</body>
+</html>

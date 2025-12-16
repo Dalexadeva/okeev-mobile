@@ -22,6 +22,7 @@
             font-family: 'Oxanium', sans-serif;
             background: #f5f5f5;
             color: #333;
+            padding-bottom: 140px;
         }
 
         .header {
@@ -405,6 +406,17 @@
             margin-bottom: 0;
         }
 
+        .calculator-result-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark-bg);
+            padding: 15px 20px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+            z-index: 99;
+        }
+
         .calculator-result {
             background: white;
             padding: 15px;
@@ -473,7 +485,7 @@
 <body>
     <div class="header">
         <button class="back-btn" onclick="history.back()">←</button>
-        <h1 class="header-title">Motor Details</h1>
+        <h1 class="header-title">Car Details</h1>
     </div>
 
     <div class="main-image-container">
@@ -487,7 +499,7 @@
     </div>
 
     <div class="car-info">
-        <div class="car-name">New U-Winfly M100</div>
+        <div class="car-name">New Air Ev Lite Long Range</div>
         <div class="car-price">IDR 194.000.000</div>
 
         <div class="button-group">
@@ -499,7 +511,7 @@
             </button>
         </div>
 
-        <button class="btn btn-order" onclick="location.href='order.html'">Order Now</button>
+        <button class="btn btn-order" onclick="location.href='checkout winfly100.html'">Order Now</button>
     </div>
 
     <div class="tabs">
@@ -512,15 +524,15 @@
     <div class="tab-content">
         <!-- Technology Tab -->
         <div id="technology" class="tab-panel active">
-            <div class="feature-title">Technology</div>
+            <div class="feature-title">Wuling Technology</div>
 
             <div class="feature-section">
                 <h3>Easy to Drive</h3>
                 <div class="feature-description">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque cupiditate eum necessitatibus.
+                    Tak perlu cemas soal ganjil - genap atau jalan Integrated Decent buat Wuling New Air Ev mudah dikendarai, diparkir, dan jadi pilih mobilitas harian yang praktis. Sekali charge, bisa jalan tempuh sampai 300km!
                 </div>
                 <div class="feature-description">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo, dolor?
+                    Dilengkapi fitur pintar seperti Hill Hold Control (HHC) untuk keamanan di tanjakan dan WIND (Wuling Indonesia Command). New Air ev siap menemani aktivitas hariannmu tanpa hambatan.
                 </div>
                 <img src="assets/product/vehicles/wuling/air-ev/Content1.png" alt="Easy to Drive" class="feature-image">
             </div>
@@ -528,14 +540,14 @@
             <div class="feature-section">
                 <h3>Easy to Own</h3>
                 <div class="feature-description">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. At iusto commodi blanditiis.
+                    Kepemilikan mobil listrik kini lebih terjangkau dengan berbagai kemudahan pembiayaan dan insentif pemerintah.
                 </div>
             </div>
 
             <div class="feature-section">
                 <h3>Easy to Charge</h3>
                 <div class="feature-description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus magni corporis fuga aliquam animi quibusdam mollitia sequi sint omnis ipsa!
+                    Charging sangat mudah dengan berbagai opsi pengisian daya yang fleksibel, baik di rumah maupun di stasiun charging publik.
                 </div>
             </div>
         </div>
@@ -558,7 +570,7 @@
                 <h3>Proven & Tested Battery, IP67</h3>
                 <img src="assets/product/vehicles/wuling/air-ev/Content2.png" alt="Battery IP67" class="feature-image">
                 <div class="feature-description">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus, beatae.
+                    Baterai yang telah teruji dengan sertifikasi IP67, tahan terhadap debu dan air, memastikan keamanan dan keandalan dalam berbagai kondisi.
                 </div>
             </div>
         </div>
@@ -597,9 +609,9 @@
 
             <div class="button-group">
                 <button class="btn btn-outline" onclick="location.href='test-drive.html'">
-                    🚗 Test Drive
+                    Test Drive
                 </button>
-                <button class="btn btn-order" onclick="location.href='order.html'">Order Now</button>
+                <button class="btn btn-order" onclick="location.href='winfly100.html'">Order Now</button>
             </div>
         </div>
 
@@ -644,57 +656,13 @@
             </div>
 
         </div>
-
-        <!-- Fitur Tab-->
-         <div id="Fitur" class="tab-panel">
-            <div class="feature-title">Fitur</div>
-
-            <div class="spec-item">
-                <div class="spec-label">Dimension</div>
-                <div class="spec-value">Length x Width x Height (mm)</div>
-                <div class="spec-value">2.974 x 1.505 x 1.631</div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-label">Wheelbase (mm)</div>
-                <div class="spec-value">2.010</div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-label">Seat Capacity</div>
-                <div class="spec-value">4</div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-label">Suspension</div>
-                <div class="spec-value">McPherson (Front) + 3-link coil spring (Rear)</div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-label">Wheel and Tire</div>
-                <div class="spec-value">12" steel wheel with full cap; 145/70R12</div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-label">Brakes</div>
-                <div class="spec-value">Disc (Front) + Drum (Rear)</div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-label">Steering</div>
-                <div class="spec-value">Electric Power Steering</div>
-            </div>
-
-        </div>
-
-
     </div>
 
     <!-- Credit Calculator Section -->
     <div class="credit-calculator-section">
         <div class="calculator-header">
             <h2>CREDIT CALCULATOR</h2>
-            <p class="powered-by">Powered by <span style="color: var(--light-green);">OKEEV FINANCE</span></p>
+            <p class="powered-by">Powered by <span style="color: var(--light-green);">BAEV FINANCE</span></p>
             <p class="calculator-desc">Our internal loans guarantee flexible financing options at competitive rates.</p>
         </div>
 
@@ -704,7 +672,7 @@
 
         <div class="calculator-form">
             <div class="form-group">
-                <label>Motor Price</label>
+                <label>Car Price</label>
                 <input type="text" class="form-input" value="Rp 149.000.000" readonly>
             </div>
 
@@ -743,15 +711,18 @@
             <p>For cars outside Jakarta, the above calculation is not binding. Additional shipping costs and regional taxes may apply to the calculation.</p>
             <p>This above calculation applies to a minimum down payment of not 10,000,000</p>
         </div>
+    </div>
 
+    <!-- Fixed Calculator Result at Bottom -->
+    <div class="calculator-result-fixed">
         <div class="calculator-result">
-            <div class="result-label">Price</div>
-            <div class="result-price">Rp 194.00.000</div>
+            <div class="result-label">Monthly Installment</div>
+            <div class="result-price">Rp 4.850.000</div>
         </div>
 
-        <div class="button-group" style="margin-top: 20px;">
+        <div class="button-group">
             <button class="btn btn-outline" onclick="location.href='test-drive.html'">Test Drive</button>
-            <button class="btn btn-order" onclick="location.href='order.html'">Bayer Now</button>
+            <button class="btn btn-order" onclick="location.href='checkout wwinfly100.html'">Order Now</button>
         </div>
     </div>
 
